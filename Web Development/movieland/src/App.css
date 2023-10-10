@@ -38,15 +38,15 @@ h1 {
 }
 
 .search {
-    width: 71%;
-    margin: 4rem 0 2rem;
+    width: 81%;
+    margin: 6rem 0 4rem;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
     padding: 1.5rem 1.75rem;
-    border-radius: 3rem;
+    border-radius: 5rem;
     background: #1f2123;
     -webkit-box-shadow: 5px 5px 7px #1c1d1f, -5px -5px 7px #222527;
     box-shadow: 5px 5px 7px #1c1d1f, -5px -5px 7px #222527;
@@ -88,7 +88,7 @@ h1 {
 
 .empty {
     width: 100%;
-    margin-top: 3rem;
+    margin-top: 5rem;
 
     display: flex;
     justify-content: center;
