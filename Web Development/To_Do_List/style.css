@@ -1,0 +1,84 @@
+body {
+    font-size: 2em;
+
+    background: #DE6262;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FFB88C, #DE6262);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FFB88C, #DE6262);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.parent {
+    background-color: rgb(241, 225, 196);
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    width: 750px;
+    height: auto;
+    margin: 10% auto;
+    padding-top: 29px;
+}
+
+.parents {
+    background-color: #fff;
+}
+
+input {
+    background-color: #fff;
+    width: 500px;
+    height: 40px;
+    margin-bottom: 200px;
+    font-size: 1em;
+}
+
+.list {
+    padding-bottom: 30px;
+}
+
+button {
+    width: 80px;
+    height: 30px;
+    font-size: 0.4em;
+    background-color: #fff;
+}
+
+button:hover {
+    background-color: black;
+    color: aliceblue;
+}
+
+@media (max-width:746px) {
+    body {
+        font-size: 2em;
+        margin: auto;
+        padding: auto;
+    }
+
+    ul {
+        font-size: 0.5em;
+    }
+
+    h1 {
+        font-size: 1.6em;
+    }
+
+    .parent {
+        width: 350px;
+        margin: 10% auto;
+        margin-top: 100px;
+    }
+
+    input {
+        width: 200px;
+        height: 20px;
+        margin-bottom: 200px;
+        font-size: 0.5em;
+    }
+
+    button {
+        width: 55px;
+        height: 20px;
+        font-size: 0.25em;
+    }
+}
