@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Drawing</title>
+    <style>
+        .house {
+            width: 200px;
+            height: 200px;
+            background-color: #ffcc66;
+            position: relative;
+        }
+
+        .roof {
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-bottom: 70px solid #aa6633;
+            position: absolute;
+            top: 0;
+            left: 50px;
+        }
+
+        .door {
+            width: 60px;
+            height: 120px;
+            background-color: #663300;
+            position: absolute;
+            bottom: 0;
+            left: 70px;
+        }
+
+        .window {
+            width: 40px;
+            height: 40px;
+            background-color: #aaffcc;
+            position: absolute;
+            top: 50px;
+            left: 80px;
+        }
+    </style>
+</head>
+<body>
+    <div class="house">
+        <div class="roof"></div>
+        <div class="door"></div>
+        <div class="window"></div>
+    </div>
+</body>
+</html>
