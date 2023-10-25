@@ -1,23 +1,23 @@
-
-
 import pickle
 import streamlit as st
 from streamlit_option_menu import option_menu
+import numpy as np
+import os
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing import image
+from PIL import Image
 
 
-# loading the saved models
 
+
+# Load the saved models
 diabetes_model = pickle.load(open('Models/diabetes.pkl', 'rb'))
-
-heart_disease_model = pickle.load(open('Models/heart.pkl', 'rb'))
-
-BreastCancer_model = pickle.load(open('Models/Breastcancer.pkl', 'rb'))
-
+heart_disease_model = pickle.load(open('Models/heart_disease_model.sav', 'rb'))
+BreastCancer_model = pickle.load(open('Models/breast_cancer.sav', 'rb'))
 liver_model = pickle.load(open('Models/liver.pkl', 'rb'))
-
 parkinsons_model = pickle.load(open('Models/parkinsons_model.sav', 'rb'))
-
-
+kidney_model = pickle.load(open('Models/kidney.sav', 'rb'))
+covidmodel = load_model(r"Models/model.h5", compile=False)
 
 
 # sidebar for navigation
@@ -28,8 +28,11 @@ with st.sidebar:
                           ['Diabetes Prediction',
                            'Heart Disease Prediction',
                            'Breast Cancer Prediction',
+                           'Kidney Disease Prediction',
                            'Liver Disease Prediction',
-                           'Parkinsons Prediction'],
+                           'Parkinsons Prediction',
+                           'Covid-19 Prediction'
+                           ],
                           default_index=0)
     
  # Parkinson's Prediction Page
@@ -350,7 +353,10 @@ if (selected == 'Breast Cancer Prediction'):
     
     # creating a button for Prediction    
     if st.button('Breast Cancer Test Result'):
-        breast_cancer_prediction = BreastCancer_model.predict([[radius_mean, texture_mean, perimeter_mean, area_mean, smoothness_mean, compactness_mean, concavity_mean, concave_points_mean, symmetry_mean, fractal_dimension_mean, radius_se, texture_se, perimeter_se, area_se, smoothness_se, compactness_se, concavity_se, concave_points_se, symmetry_se, fractal_dimension_se, radius_worst, texture_worst, perimeter_worst, area_worst, smoothness_worst, compactness_worst, concavity_worst, concave_points_worst, symmetry_worst, fractal_dimension_worst]])  
+        input = (float(radius_mean),float(texture_mean),float(perimeter_mean),float(area_mean), float(smoothness_mean),float(compactness_mean), float(concavity_mean),float(concave_points_mean),float(symmetry_mean),float(fractal_dimension_mean), float(radius_se),float(texture_se), float(perimeter_se),float(area_se),float(smoothness_se),float(compactness_se), float(concavity_se),float(concave_points_se),float(symmetry_se),float(fractal_dimension_se),float(radius_worst),float(texture_worst),float(perimeter_worst), float(area_worst), float(smoothness_worst),float(compactness_worst),float(concavity_worst), float(concave_points_worst),float(symmetry_worst), float(fractal_dimension_worst))
+        input_data_as_numpy_array = np.asarray(input)
+        input_data_reshaped = input_data_as_numpy_array.reshape(1,-1)
+        breast_cancer_prediction = BreastCancer_model.predict(input_data_reshaped)  
         
         if (breast_cancer_prediction[0] == 1):
             breast_cancer_diagnosis = 'The person has breast cancer'
@@ -406,7 +412,10 @@ if (selected == 'Liver Disease Prediction'):
     
     # creating a button for Prediction    
     if st.button('Liver Disease Test Result'):
-        liver_prediction = liver_model.predict([[age, gender, total_bilirubin, direct_bilirubin, alkaline_phosphotase, alamine_aminotransferase, aspartate_aminotransferase, total_protiens, albumin, albumin_globulin_ratio]])  
+        livinput = (float(age), float(gender), float(total_bilirubin), float(direct_bilirubin), float(alkaline_phosphotase), float(alamine_aminotransferase), float(aspartate_aminotransferase),float(total_protiens), float(albumin), float(albumin_globulin_ratio))
+        inputliv_data_as_numpy_array = np.asarray(livinput)
+        livinput_data_reshaped = inputliv_data_as_numpy_array.reshape(1,-1)
+        liver_prediction = liver_model.predict(livinput_data_reshaped)  
         
         if (liver_prediction[0] == 1):
             liver_diagnosis = 'The person has liver disease'
@@ -415,7 +424,104 @@ if (selected == 'Liver Disease Prediction'):
         
     st.success(liver_diagnosis)
 
+# Kidney Disease Prediction Page
+if (selected == 'Kidney Disease Prediction'):
+   
+    # page title
+    st.title('Kidney Disease Prediction using ML')
+   
+    col1, col2, col3 = st.columns(3)
+   
+    with col1:
+        age = st.text_input('Age')
+       
+    with col2:
+        bp = st.text_input('Blood Pressure')
+           
+    with col3:
+        al = st.text_input('Albumin')
+       
+    with col1:
+        su = st.text_input('Sugar')
+       
+    with col2:
+        rbc = st.text_input('Red Blood Cells')
+       
+    with col3:
+        pc = st.text_input('Pus Cell')
+       
+    with col1:
+        pcc = st.text_input('Pus Cell Clumps')
+       
+    with col2:
+        ba = st.text_input('Bacteria')
+       
+    with col3:
+        bgr = st.text_input('Blood Glucose Random')
+       
+    with col1:
+        bu = st.text_input('Blood Urea')
+       
+    with col2:
+        sc = st.text_input('Serum Creatinine')
+       
+          
+    with col3:
+        pot = st.text_input('Potassium')
+          
+           
+    with col1:
+        wc = st.text_input('White Blood Cell Count')
+       
+           
+    with col2:
+        htn = st.text_input('Hypertension')
+       
+    with col3:
+        dm = st.text_input('Diabetes Mellitus')
+       
+    with col1:
+        cad = st.text_input('Coronary Artery Disease')
+       
+           
+    with col2:
+        pe = st.text_input('Pedal Edema')
+       
+    with col3:
+        ane = st.text_input('Anemia')
+       
+    # code for Prediction
+    kidney_diagnosis = ''
+   
+    # creating a button for Prediction    
+    if st.button('Kidney Disease Test Result'):
+        kidney_prediction = kidney_model.predict([[age, bp, al, su, rbc, pc, pcc, ba, bgr, bu, sc,pot, wc,htn, dm, cad,pe, ane]])  # Add all input values
+       
+        if (kidney_prediction[0] == 1):
+            kidney_diagnosis = 'The person has kidney disease'
+        else:
+            kidney_diagnosis = 'The person does not have kidney disease'
+       
+    st.success(kidney_diagnosis)
 
+if (selected == "Covid-19 Prediction"):
+    st.title("COVID-19 Detection App")
+
+    st.write("Upload an X-ray image for prediction")
+    uploaded_image = st.file_uploader("Choose an X-ray image...", type=["jpg", "png", "jpeg"])
+
+    if uploaded_image is not None:
+        pil_image = Image.open(uploaded_image)
+        st.image(pil_image, caption='Uploaded Image', use_column_width=True)
+
+        if st.button('Predict'):
+            img = image.load_img(uploaded_image, target_size=(299, 299))
+            x = image.img_to_array(img)
+            x = np.expand_dims(x, axis=0)
+            pred = np.argmax(covidmodel.predict(x), axis=1)
+            index = ['COVID', 'Lung Opacity', 'Normal', 'Viral Pneumonia']
+            result_text = f"Result: {index[pred[0]]}"
+            st.success(result_text)    
 
 
 
