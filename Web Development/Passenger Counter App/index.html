@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passenger Counter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .counter {
+            font-size: 36px;
+        }
+        button {
+            font-size: 24px;
+            padding: 10px 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Passenger Counter App</h1>
+    <div class="counter">0</div>
+    <button id="increase">Increase</button>
+    <button id="decrease">Decrease</button>
+    
+    <script>
+        const counterDisplay = document.querySelector('.counter');
+        const increaseButton = document.getElementById('increase');
+        const decreaseButton = document.getElementById('decrease');
+
+        let passengerCount = 0;
+
+        function updateCounter() {
+            counterDisplay.textContent = passengerCount;
+        }
+
+        increaseButton.addEventListener('click', () => {
+            passengerCount++;
+            updateCounter();
+        });
+
+        decreaseButton.addEventListener('click', () => {
+            if (passengerCount > 0) {
+                passengerCount--;
+                updateCounter();
+            }
+        });
+    </script>
+</body>
+</html>
